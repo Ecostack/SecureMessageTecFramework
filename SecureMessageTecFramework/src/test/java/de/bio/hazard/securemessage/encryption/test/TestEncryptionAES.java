@@ -40,9 +40,20 @@ public class TestEncryptionAES extends TestCase {
 			InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		KeyGenerator kgen = KeyGenerator.getInstance("AES", "BC");
 		kgen.init(128);
+		Long lcTime = System.currentTimeMillis();
+		
 		SecretKey skey = kgen.generateKey();
+		
+		System.err.println("AES Key: "+(System.currentTimeMillis()-lcTime));
+		
 		byte[] raw = skey.getEncoded();
+		
+		raw = new byte [] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
+		System.err.println(new String(
+				org.apache.commons.codec.binary.Hex.encodeHex(skey.getEncoded()))+" / "+new String(
+						org.apache.commons.codec.binary.Hex.encodeHex(raw)));
+		
 		String key = new String(
 				org.apache.commons.codec.binary.Hex.encodeHex(raw));
 		// System.out.printf("My Secret Key: %s\n", key);

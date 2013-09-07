@@ -77,6 +77,9 @@ public class TestEncryption2 extends TestCase {
 		Long lcTime = System.currentTimeMillis();
 
 		cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+		
+		System.err.println(privateKey.getClass());
+		
 		System.err.println("cipher init encrypt: " + (System.currentTimeMillis() - lcTime));
 		lcTime = System.currentTimeMillis();
 
