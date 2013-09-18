@@ -1,4 +1,4 @@
-package de.bio.hazard.securemessage.encryption.async;
+package de.bio.hazard.securemessage.tecframework.encryption.asymmetric;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -13,10 +13,13 @@ import org.bouncycastle.crypto.engines.RSAEngine;
 import org.bouncycastle.crypto.util.PrivateKeyFactory;
 import org.bouncycastle.crypto.util.PublicKeyFactory;
 
-public class AsyncCrypt {
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+public class AsymmetricCrypt {
 	RSAEngine cipher = null;
 
-	public AsyncCrypt() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public AsymmetricCrypt() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		cipher = new RSAEngine();
 	}
@@ -41,8 +44,8 @@ public class AsyncCrypt {
 		return lcResult;
 	}
 	
-	private byte[] innerCrypt(byte[] data, byte[] key,boolean encrypt, boolean privateCrypt) throws IOException{		
-		if(privateCrypt){
+	private byte[] innerCrypt(byte[] data, byte[] key,boolean encrypt, boolean isPrivateKey) throws IOException{		
+		if(isPrivateKey){
 			cipher.init(encrypt, PrivateKeyFactory.createKey(key));
 		}
 		else{
@@ -62,11 +65,11 @@ public class AsyncCrypt {
 		return classByteListToPrimitiveByteArray(output);
 	}
 	
-	public byte[] encrypt(byte[] data, byte[] key,boolean privateCrypt) throws IOException{
-		return innerCrypt(data,key,true,privateCrypt);
+	public byte[] encrypt(byte[] data, byte[] key,boolean isPrivateKey) throws IOException{
+		return innerCrypt(data,key,true,isPrivateKey);
 	}
 	
-	public byte[] decrypt(byte[] data, byte[] key,boolean privateCrypt) throws IOException{
-		return innerCrypt(data,key,false,privateCrypt);
+	public byte[] decrypt(byte[] data, byte[] key,boolean isPrivateKey) throws IOException{
+		return innerCrypt(data,key,false,isPrivateKey);
 	}
 }

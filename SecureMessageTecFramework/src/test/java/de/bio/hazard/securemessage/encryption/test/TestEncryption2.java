@@ -71,7 +71,11 @@ public class TestEncryption2 extends TestCase {
 //		originalText = lcMeinTestString.toString();
 //	}
 
-	public void testbEncrypt() throws InvalidKeyException,
+	public void testEmpty() {
+		
+	    }
+	
+	public void _testbEncrypt() throws InvalidKeyException,
 			IllegalBlockSizeException, BadPaddingException {
 		
 		Long lcTime = System.currentTimeMillis();

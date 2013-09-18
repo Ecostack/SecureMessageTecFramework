@@ -1,4 +1,4 @@
-package de.bio.hazard.securemessage.encryption.hashing;
+package de.bio.hazard.securemessage.tecframework.encryption.hashing;
 
 // Copyright (c) 2006 Damien Miller <djm@mindrot.org>
 //

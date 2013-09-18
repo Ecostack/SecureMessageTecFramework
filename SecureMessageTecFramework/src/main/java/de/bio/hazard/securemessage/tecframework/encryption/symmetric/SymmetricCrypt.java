@@ -1,4 +1,4 @@
-package de.bio.hazard.securemessage.encryption.sync;
+package de.bio.hazard.securemessage.tecframework.encryption.symmetric;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -11,10 +11,10 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-public class SyncCrypt {
+public class SymmetricCrypt {
 	private Cipher cipher;
 	
-	public SyncCrypt() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException{
+	public SymmetricCrypt() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException{
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		cipher = Cipher.getInstance("AES", "BC");
 	}

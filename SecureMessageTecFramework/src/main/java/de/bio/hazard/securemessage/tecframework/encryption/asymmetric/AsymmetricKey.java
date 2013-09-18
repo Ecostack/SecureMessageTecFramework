@@ -1,20 +1,20 @@
-package de.bio.hazard.securemessage.encryption.async;
+package de.bio.hazard.securemessage.tecframework.encryption.asymmetric;
 
-public class AsyncKey {
+public class AsymmetricKey {
 	private byte[] privateKey;
 	private byte[] publicKey;
 	
-	public AsyncKey(){
+	public AsymmetricKey(){
 		setPublicKey(null);
 		setPrivateKey(null);
 	}
 	
-	public AsyncKey(byte[] publicKey){
+	public AsymmetricKey(byte[] publicKey){
 		setPublicKey(publicKey);
 		setPrivateKey(null);
 	}
 	
-	public AsyncKey(byte[] publicKey, byte[] privateKey){
+	public AsymmetricKey(byte[] publicKey, byte[] privateKey){
 		setPublicKey(publicKey);
 		setPrivateKey(privateKey);
 	}

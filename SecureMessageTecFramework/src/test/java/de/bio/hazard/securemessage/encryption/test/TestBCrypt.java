@@ -1,6 +1,6 @@
 package de.bio.hazard.securemessage.encryption.test;
 
-import de.bio.hazard.securemessage.encryption.hashing.BCrypt;
+import de.bio.hazard.securemessage.tecframework.encryption.hashing.BCrypt;
 import junit.framework.TestCase;
 
 public class TestBCrypt extends TestCase {

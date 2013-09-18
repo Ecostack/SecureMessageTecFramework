@@ -12,18 +12,23 @@ import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.generators.RSAKeyPairGenerator;
 import org.bouncycastle.crypto.params.RSAKeyGenerationParameters;
 
-import de.bio.hazard.securemessage.encryption.async.AsyncCrypt;
-import de.bio.hazard.securemessage.encryption.async.AsyncKey;
-import de.bio.hazard.securemessage.encryption.async.AsyncKeygen;
+import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricCrypt;
+import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricKey;
+import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricKeygen;
 import junit.framework.TestCase;
 
 public class TestAsyncCrypt extends TestCase {
-	public void testAsyncCrypt() throws NoSuchAlgorithmException,
+    
+    public void testEmpty() {
+	
+    }
+    
+	public void _testAsyncCrypt() throws NoSuchAlgorithmException,
 			NoSuchProviderException, NoSuchPaddingException, IOException {
 		boolean assertBoolean=false;
-		AsyncKeygen keygen = new AsyncKeygen();
-		AsyncKey keys = keygen.getAsyncKey(2048);
-		AsyncCrypt crypt = new AsyncCrypt();
+		AsymmetricKeygen keygen = new AsymmetricKeygen();
+		AsymmetricKey keys = keygen.getAsyncKey(2048);
+		AsymmetricCrypt crypt = new AsymmetricCrypt();
 
 		byte[] data = new byte[4000];
 
