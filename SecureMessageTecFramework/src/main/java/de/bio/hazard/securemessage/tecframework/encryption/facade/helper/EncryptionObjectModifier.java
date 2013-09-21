@@ -27,36 +27,44 @@ public class EncryptionObjectModifier {
 	asymmetricCrypt = new AsymmetricCrypt();
 	symmetricCrypt = new SymmetricCrypt();
     }
-
-    public String symmetricEncrypt(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-	return b64Encoder.encode(symmetricCrypt.encrypt(data.getBytes(), key));
-    }
-
-    public String symmetricDecrypt(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
-	return new String(symmetricCrypt.decrypt(b64Decoder.decodeBuffer(data), key));
-    }
     
     public String asymmetricEncrypt(String data, byte[] key, boolean isPrivateKey) throws IOException {
 	return b64Encoder.encode(asymmetricCrypt.encrypt(data.getBytes(), key, isPrivateKey));
-    }
-
-    public String asymmetricDecrypt(String data, byte[] key, boolean isPrivateKey) throws IOException {
-	return new String(asymmetricCrypt.decrypt(b64Decoder.decodeBuffer(data), key, isPrivateKey));
-    }
-    
-    public String symmetricEncrypt(byte[] data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-	return b64Encoder.encode(symmetricCrypt.encrypt(data, key));
-    }
-
-    public byte[] symmetricDecryptToByte(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
-	return symmetricCrypt.decrypt(b64Decoder.decodeBuffer(data), key);
     }
     
     public String asymmetricEncrypt(byte[] data, byte[] key, boolean isPrivateKey) throws IOException {
 	return b64Encoder.encode(asymmetricCrypt.encrypt(data, key, isPrivateKey));
     }
+
+    public String symmetricEncrypt(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	return b64Encoder.encode(symmetricCrypt.encrypt(data.getBytes(), key));
+    }
+    
+    public String symmetricEncrypt(byte[] data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	return b64Encoder.encode(symmetricCrypt.encrypt(data, key));
+    }
+    
+    public String symmetricEncrypt(long data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	return symmetricEncrypt(""+data, key);
+    }
+
+    public String asymmetricDecrypt(String data, byte[] key, boolean isPrivateKey) throws IOException {
+	return new String(asymmetricDecryptToByte(data, key, isPrivateKey));
+    }
     
     public byte[] asymmetricDecryptToByte(String data, byte[] key, boolean isPrivateKey) throws IOException {
 	return asymmetricCrypt.decrypt(b64Decoder.decodeBuffer(data), key, isPrivateKey);
+    }
+    
+    public String symmetricDecrypt(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
+	return new String(symmetricDecryptToByte(data, key));
+    }
+    
+    public byte[] symmetricDecryptToByte(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
+	return symmetricCrypt.decrypt(b64Decoder.decodeBuffer(data), key);
+    }
+    
+    public long symmetricDecryptToLong(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
+	return new Long(symmetricDecrypt(data, key));
     }
 }
