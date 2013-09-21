@@ -28,6 +28,14 @@ public class EncryptionObjectModifier {
 	symmetricCrypt = new SymmetricCrypt();
     }
     
+    public String encodeBase64(byte[] data) {
+	return b64Encoder.encode(data);
+    }
+    
+    public byte[] decodeBase64ToByte(String data) throws IOException {
+	return b64Decoder.decodeBuffer(data);
+    }
+    
     public String asymmetricEncrypt(String data, byte[] key, boolean isPrivateKey) throws IOException {
 	return b64Encoder.encode(asymmetricCrypt.encrypt(data.getBytes(), key, isPrivateKey));
     }
