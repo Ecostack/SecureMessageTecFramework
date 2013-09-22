@@ -32,8 +32,16 @@ public class EncryptionObjectModifier {
 	return b64Encoder.encode(data);
     }
     
+    public String encodeBase64(String data) {
+	return encodeBase64(data.getBytes());
+    }
+    
     public byte[] decodeBase64ToByte(String data) throws IOException {
 	return b64Decoder.decodeBuffer(data);
+    }
+    
+    public String decodeBase64(String data) throws IOException {
+	return new String(decodeBase64ToByte(data));
     }
     
     public String asymmetricEncrypt(String data, byte[] key, boolean isPrivateKey) throws IOException {
@@ -75,4 +83,6 @@ public class EncryptionObjectModifier {
     public long symmetricDecryptToLong(String data, byte[] key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
 	return new Long(symmetricDecrypt(data, key));
     }
+    
+    //TODO Stream ver- und entschlüsseln
 }
