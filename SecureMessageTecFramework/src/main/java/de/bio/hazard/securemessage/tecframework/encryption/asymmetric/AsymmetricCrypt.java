@@ -13,9 +13,6 @@ import org.bouncycastle.crypto.engines.RSAEngine;
 import org.bouncycastle.crypto.util.PrivateKeyFactory;
 import org.bouncycastle.crypto.util.PublicKeyFactory;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 public class AsymmetricCrypt {
 	RSAEngine cipher = null;
 
@@ -53,10 +50,6 @@ public class AsymmetricCrypt {
 		}
 		int blockSize = cipher.getInputBlockSize();
 		List<Byte> output = new ArrayList<Byte>();
-		//for (int chunkPosition = 0; chunkPosition < data.length; chunkPosition += blockSize) {
-		//	int chunkSize = Math.min(blockSize, data.length - (chunkPosition * blockSize));
-		//	addByteArrayToByteList(cipher.processBlock(data, chunkPosition, chunkSize), output);
-		//}
 		int chunkSize=0;
 		for(int chunkCounter = 0; chunkCounter*blockSize < data.length; chunkCounter++) {
 			chunkSize=Math.min(blockSize, data.length - (chunkCounter * blockSize));

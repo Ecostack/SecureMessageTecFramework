@@ -15,12 +15,12 @@ public class AsymmetricKeygen {
 		generator = KeyPairGenerator.getInstance("RSA", "BC");
 	}
 	
-	public AsymmetricKey getAsyncKey(int keySizeInBits){
+	public AsymmetricKey getKey(int keySizeInBits){
 		KeyPair kp = getKeyPair(keySizeInBits);
 		return new AsymmetricKey(kp.getPublic().getEncoded(), kp.getPrivate().getEncoded());
 	}
 	
-	public KeyPair getKeyPair(int keySizeInBits){
+	private KeyPair getKeyPair(int keySizeInBits){
 		generator.initialize(keySizeInBits);
 		return generator.genKeyPair();
 	}

@@ -27,7 +27,7 @@ public class TestAsyncCrypt extends TestCase {
 			NoSuchProviderException, NoSuchPaddingException, IOException {
 		boolean assertBoolean=false;
 		AsymmetricKeygen keygen = new AsymmetricKeygen();
-		AsymmetricKey keys = keygen.getAsyncKey(2048);
+		AsymmetricKey keys = keygen.getKey(2048);
 		AsymmetricCrypt crypt = new AsymmetricCrypt();
 
 		byte[] data = new byte[4000];
