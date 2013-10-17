@@ -84,5 +84,5 @@ public class EncryptionObjectModifier {
 	return new Long(symmetricDecrypt(data, key));
     }
     
-    //TODO Stream ver- und entschlüsseln
+    //TODO Stream ver- und entschlÃ¼sseln
 }
