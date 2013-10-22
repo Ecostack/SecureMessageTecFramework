@@ -3,7 +3,6 @@ package de.bio.hazard.securemessage.encryption.test;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -21,17 +20,17 @@ public class TestEnryption extends TestCase {
 		Random lcRandom = new Random();
 		StringBuilder lcMeinTestString = new StringBuilder();
 		for (int i = 0; i < 2000; i++) {
-			lcMeinTestString.append(lcRandom.nextInt()+"");
+			lcMeinTestString.append(lcRandom.nextInt() + "");
 		}
 		System.err.println(lcMeinTestString.toString());
-		
+
 		interalTest(lcMeinTestString.toString());
 
 	}
-	
+
 	public void testEmpty() {
-		
-	    }
+
+	}
 
 	private void interalTest(String pText) {
 		AsymmetricCipherKeyPair lcKeyPair = generateKeys(4000);
@@ -40,19 +39,18 @@ public class TestEnryption extends TestCase {
 
 		byte[] lcEncrypted = encrypt(lcHallo.getBytes(), lcKeyPair.getPrivate());
 		byte[] lcDecrypted = decrypt(lcEncrypted, lcKeyPair.getPublic());
-		
+
 		String lcDecryptedPrivToPub = new String(lcDecrypted);
-		
+
 		assertTrue(lcHallo.equals(lcDecryptedPrivToPub));
-		
+
 		lcEncrypted = encrypt(lcHallo.getBytes(), lcKeyPair.getPublic());
 		lcDecrypted = decrypt(lcEncrypted, lcKeyPair.getPrivate());
-		
+
 		String lcDecryptedPubToPriv = new String(lcDecrypted);
-		
+
 		assertTrue(lcHallo.equals(lcDecryptedPubToPriv));
 	}
-	
 
 	private void printByteArray(byte[] pArray) {
 		System.err.println("Print byte array: ");
@@ -80,8 +78,9 @@ public class TestEnryption extends TestCase {
 		List<Byte> output = new ArrayList<Byte>();
 
 		for (int chunkPosition = 0; chunkPosition < data.length; chunkPosition += blockSize) {
-			int chunkSize = Math.max(Math.min(blockSize, data.length
-					- (chunkPosition * blockSize)),0);
+			int chunkSize = Math.max(
+					Math.min(blockSize, data.length
+							- (chunkPosition * blockSize)), 0);
 
 			addByteArrayToByteList(
 					e.processBlock(data, chunkPosition, chunkSize), output);
@@ -118,8 +117,9 @@ public class TestEnryption extends TestCase {
 		List<Byte> output = new ArrayList<Byte>();
 
 		for (int chunkPosition = 0; chunkPosition < data.length; chunkPosition += blockSize) {
-			int chunkSize = Math.max(Math.min(blockSize, data.length
-					- (chunkPosition * blockSize)),0);
+			int chunkSize = Math.max(
+					Math.min(blockSize, data.length
+							- (chunkPosition * blockSize)), 0);
 
 			addByteArrayToByteList(
 					e.processBlock(data, chunkPosition, chunkSize), output);

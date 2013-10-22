@@ -13,31 +13,33 @@ import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricCr
 import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricKeygen;
 
 public class TestSyncCrypt extends TestCase {
-    
-public void testEmpty() {
-	
-    }
-    
-	public void _testSyncCrypt() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
-		SymmetricKeygen keygen=new SymmetricKeygen();
-		SymmetricCrypt crypt=new SymmetricCrypt();
-		byte[] key=keygen.getKey(128);
-		
+
+	public void testEmpty() {
+
+	}
+
+	public void _testSyncCrypt() throws NoSuchAlgorithmException,
+			NoSuchProviderException, NoSuchPaddingException,
+			InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+		SymmetricKeygen keygen = new SymmetricKeygen();
+		SymmetricCrypt crypt = new SymmetricCrypt();
+		byte[] key = keygen.getKey(128);
+
 		StringBuilder lcMeinTestString = new StringBuilder();
 		for (int i = 0; i < 500; i++) {
 			lcMeinTestString.append("a");
 		}
 
 		String originalText = lcMeinTestString.toString();
-		
-		byte[] encrypted=crypt.encrypt(originalText.getBytes(), key);
+
+		byte[] encrypted = crypt.encrypt(originalText.getBytes(), key);
 		assertTrue(!(new String(encrypted).equals(originalText)));
-		byte[] decrypted=crypt.decrypt(encrypted, key);
+		byte[] decrypted = crypt.decrypt(encrypted, key);
 		assertTrue(new String(decrypted).equals(originalText));
 	}
-	
-	private void printByteArray(String name,byte[] pArray) {
-		System.err.println("Print byte array ("+name+"): ");
+
+	private void printByteArray(String name, byte[] pArray) {
+		System.err.println("Print byte array (" + name + "): ");
 		for (byte b : pArray) {
 			// System.out.printf("0x%02X", b);
 			System.out.print((char) b);

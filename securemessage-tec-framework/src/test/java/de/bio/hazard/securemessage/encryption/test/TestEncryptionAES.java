@@ -34,10 +34,10 @@ public class TestEncryptionAES extends TestCase {
 
 		originalText = lcMeinTestString.toString();
 	}
-	
+
 	public void testEmpty() {
-		
-	    }
+
+	}
 
 	public void _testOne() throws NoSuchAlgorithmException,
 			NoSuchProviderException, DecoderException, NoSuchPaddingException,
@@ -45,19 +45,22 @@ public class TestEncryptionAES extends TestCase {
 		KeyGenerator kgen = KeyGenerator.getInstance("AES", "BC");
 		kgen.init(128);
 		Long lcTime = System.currentTimeMillis();
-		
-		SecretKey skey = kgen.generateKey();
-		
-		System.err.println("AES Key: "+(System.currentTimeMillis()-lcTime));
-		
-		byte[] raw = skey.getEncoded();
-		
-		raw = new byte [] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
-		System.err.println(new String(
-				org.apache.commons.codec.binary.Hex.encodeHex(skey.getEncoded()))+" / "+new String(
-						org.apache.commons.codec.binary.Hex.encodeHex(raw)));
-		
+		SecretKey skey = kgen.generateKey();
+
+		System.err.println("AES Key: " + (System.currentTimeMillis() - lcTime));
+
+		byte[] raw = skey.getEncoded();
+
+		raw = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
+		System.err
+				.println(new String(org.apache.commons.codec.binary.Hex
+						.encodeHex(skey.getEncoded()))
+						+ " / "
+						+ new String(org.apache.commons.codec.binary.Hex
+								.encodeHex(raw)));
+
 		String key = new String(
 				org.apache.commons.codec.binary.Hex.encodeHex(raw));
 		// System.out.printf("My Secret Key: %s\n", key);
@@ -83,7 +86,7 @@ public class TestEncryptionAES extends TestCase {
 		String originalMessage = new String(
 				cipher.doFinal(org.apache.commons.codec.binary.Hex
 						.decodeHex(encryptedMessage.toCharArray())));
-		
+
 		assertTrue(originalMessage.equals(originalText));
 		// System.out.printf("The original message: %s\n", originalMessage);
 	}

@@ -31,8 +31,7 @@ public class TestEncryption2 extends TestCase {
 			NoSuchProviderException, NoSuchPaddingException {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		cipher = Cipher.getInstance("RSA", "BC");
-		
-		
+
 		Random lcRandom = new Random();
 		StringBuilder lcMeinTestString = new StringBuilder();
 		for (int i = 0; i < 512; i++) {
@@ -40,7 +39,7 @@ public class TestEncryption2 extends TestCase {
 		}
 
 		originalText = lcMeinTestString.toString();
-		
+
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
 		keyGen.initialize(4096);
 		KeyPair kp = keyGen.genKeyPair();
@@ -49,65 +48,69 @@ public class TestEncryption2 extends TestCase {
 		privateKey = kp.getPrivate();
 	}
 
-//	public void test1RSAwithBC() throws NoSuchAlgorithmException,
-//			NoSuchProviderException {
-//
-//		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
-//		keyGen.initialize(4096);
-//		KeyPair kp = keyGen.genKeyPair();
-//
-//		publicKey = kp.getPublic();
-//		privateKey = kp.getPrivate();
-//
-//	}
+	// public void test1RSAwithBC() throws NoSuchAlgorithmException,
+	// NoSuchProviderException {
+	//
+	// KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
+	// keyGen.initialize(4096);
+	// KeyPair kp = keyGen.genKeyPair();
+	//
+	// publicKey = kp.getPublic();
+	// privateKey = kp.getPrivate();
+	//
+	// }
 
-//	public void test2GenerateText() {
-//		Random lcRandom = new Random();
-//		StringBuilder lcMeinTestString = new StringBuilder();
-//		for (int i = 0; i < 512; i++) {
-//			lcMeinTestString.append("a");
-//		}
-//
-//		originalText = lcMeinTestString.toString();
-//	}
+	// public void test2GenerateText() {
+	// Random lcRandom = new Random();
+	// StringBuilder lcMeinTestString = new StringBuilder();
+	// for (int i = 0; i < 512; i++) {
+	// lcMeinTestString.append("a");
+	// }
+	//
+	// originalText = lcMeinTestString.toString();
+	// }
 
 	public void testEmpty() {
-		
-	    }
-	
+
+	}
+
 	public void _testbEncrypt() throws InvalidKeyException,
 			IllegalBlockSizeException, BadPaddingException {
-		
+
 		Long lcTime = System.currentTimeMillis();
 
 		cipher.init(Cipher.ENCRYPT_MODE, privateKey);
-		
+
 		System.err.println(privateKey.getClass());
-		
-		System.err.println("cipher init encrypt: " + (System.currentTimeMillis() - lcTime));
+
+		System.err.println("cipher init encrypt: "
+				+ (System.currentTimeMillis() - lcTime));
 		lcTime = System.currentTimeMillis();
 
 		encryptedByteArray = cipher.doFinal(originalText.getBytes());
-		System.err.println("encrypt and store: " + (System.currentTimeMillis() - lcTime));
+		System.err.println("encrypt and store: "
+				+ (System.currentTimeMillis() - lcTime));
 		lcTime = System.currentTimeMillis();
-		
+
 		cipher.init(Cipher.DECRYPT_MODE, publicKey);
-		System.err.println("cipher init decrypt: " + (System.currentTimeMillis() - lcTime));
+		System.err.println("cipher init decrypt: "
+				+ (System.currentTimeMillis() - lcTime));
 		lcTime = System.currentTimeMillis();
 		byte[] y = cipher.doFinal(encryptedByteArray);
-		System.err.println("decrypt and store: " + (System.currentTimeMillis() - lcTime));
+		System.err.println("decrypt and store: "
+				+ (System.currentTimeMillis() - lcTime));
 		lcTime = System.currentTimeMillis();
 
 		assertTrue(new String(y).equals(originalText));
 
 	}
 
-//	public void testaDecrypt() throws InvalidKeyException,
-//			IllegalBlockSizeException, BadPaddingException {
-//		cipher.init(Cipher.DECRYPT_MODE, privateKey);
-//		byte[] y = cipher.doFinal(encryptedByteArray);
-//
-//		assertTrue(new String(y).equals(originalText));
-//
-//	}
+	// public void testaDecrypt() throws InvalidKeyException,
+	// IllegalBlockSizeException, BadPaddingException {
+	// cipher.init(Cipher.DECRYPT_MODE, privateKey);
+	// byte[] y = cipher.doFinal(encryptedByteArray);
+	//
+	// assertTrue(new String(y).equals(originalText));
+	//
+	// }
 }

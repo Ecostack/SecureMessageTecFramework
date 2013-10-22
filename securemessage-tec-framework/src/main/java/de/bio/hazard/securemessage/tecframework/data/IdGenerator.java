@@ -13,5 +13,5 @@ public class IdGenerator {
 	public synchronized String nextId() {
 		return getNextRandomNumber().toString(32);
 	}
-	
+
 }

@@ -8,11 +8,12 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 public class SymmetricKeygen {
-	public SymmetricKeygen(){
+	public SymmetricKeygen() {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 	}
-	
-	public byte[] getKey(int keySizeInBits) throws NoSuchAlgorithmException, NoSuchProviderException{
+
+	public byte[] getKey(int keySizeInBits) throws NoSuchAlgorithmException,
+			NoSuchProviderException {
 		KeyGenerator kgen = KeyGenerator.getInstance("AES", "BC");
 		kgen.init(keySizeInBits);
 		SecretKey skey = kgen.generateKey();
