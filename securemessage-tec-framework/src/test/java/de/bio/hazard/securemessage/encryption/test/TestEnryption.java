@@ -1,12 +1,12 @@
 package de.bio.hazard.securemessage.encryption.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import junit.framework.TestCase;
 
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.engines.RSAEngine;
@@ -14,9 +14,10 @@ import org.bouncycastle.crypto.generators.RSAKeyPairGenerator;
 import org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import org.bouncycastle.crypto.params.RSAKeyGenerationParameters;
 
-public class TestEnryption extends TestCase {
+public class TestEnryption {
 
-	public void _testRSA() {
+	// @Test
+	public void testRSA() {
 		Random lcRandom = new Random();
 		StringBuilder lcMeinTestString = new StringBuilder();
 		for (int i = 0; i < 2000; i++) {
@@ -25,10 +26,6 @@ public class TestEnryption extends TestCase {
 		System.err.println(lcMeinTestString.toString());
 
 		interalTest(lcMeinTestString.toString());
-
-	}
-
-	public void testEmpty() {
 
 	}
 

@@ -1,10 +1,13 @@
 package de.bio.hazard.securemessage.encryption.test;
 
+import static org.junit.Assert.assertTrue;
+
+import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
 import java.security.Security;
-import java.util.Random;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -12,21 +15,21 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.codec.DecoderException;
+import org.junit.BeforeClass;
 
-public class TestEncryptionAES extends TestCase {
+public class TestEncryptionAES {
 
-	String originalText = "";
+	private static String originalText = "";
 
-	public void setUp() throws NoSuchAlgorithmException,
+	@BeforeClass
+	public static void setUp() throws NoSuchAlgorithmException,
 			NoSuchProviderException, NoSuchPaddingException {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
-		Random lcRandom = new Random();
 		StringBuilder lcMeinTestString = new StringBuilder();
 		for (int i = 0; i < 1000000; i++) {
 			lcMeinTestString.append("a");
@@ -35,11 +38,8 @@ public class TestEncryptionAES extends TestCase {
 		originalText = lcMeinTestString.toString();
 	}
 
-	public void testEmpty() {
-
-	}
-
-	public void _testOne() throws NoSuchAlgorithmException,
+	// @Test
+	public void testOne() throws NoSuchAlgorithmException,
 			NoSuchProviderException, DecoderException, NoSuchPaddingException,
 			InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		KeyGenerator kgen = KeyGenerator.getInstance("AES", "BC");
@@ -91,30 +91,31 @@ public class TestEncryptionAES extends TestCase {
 		// System.out.printf("The original message: %s\n", originalMessage);
 	}
 
-	// public void testTwo() throws Exception {
-	//
-	// SecureRandom lcSecureRandom = new SecureRandom();
-	// byte[] lcKey = new byte[16];
-	// lcSecureRandom.nextBytes(lcKey);
-	//
-	// /* Derive the key, given password and salt. */
-	// // SecretKeyFactory factory =
-	// // SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-	// // KeySpec spec = new PBEKeySpec(password, salt, 65536, 256);
-	// // SecretKey tmp = factory.generateSecret(spec);
-	// SecretKey secret = new SecretKeySpec(lcKey, "AES");
-	// /* Encrypt the message. */
-	// Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "BC");
-	// cipher.init(Cipher.ENCRYPT_MODE, secret);
-	// AlgorithmParameters params = cipher.getParameters();
-	// byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
-	// byte[] ciphertext = cipher.doFinal("Hello, World!".getBytes("UTF-8"));
-	//
-	// // cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "BC");
-	// cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
-	// // params = cipher.getParameters();
-	// // iv = params.getParameterSpec(IvParameterSpec.class).getIV();
-	// byte[] decryptText = cipher.doFinal(ciphertext);
-	// System.err.println("Decrypted: "+ new String(decryptText, "UTF-8"));
-	// }
+	// @Test
+	public void testTwo() throws Exception {
+
+		SecureRandom lcSecureRandom = new SecureRandom();
+		byte[] lcKey = new byte[16];
+		lcSecureRandom.nextBytes(lcKey);
+
+		/* Derive the key, given password and salt. */
+		// SecretKeyFactory factory =
+		// SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		// KeySpec spec = new PBEKeySpec(password, salt, 65536, 256);
+		// SecretKey tmp = factory.generateSecret(spec);
+		SecretKey secret = new SecretKeySpec(lcKey, "AES");
+		/* Encrypt the message. */
+		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "BC");
+		cipher.init(Cipher.ENCRYPT_MODE, secret);
+		AlgorithmParameters params = cipher.getParameters();
+		byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+		byte[] ciphertext = cipher.doFinal("Hello, World!".getBytes("UTF-8"));
+
+		// cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "BC");
+		cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
+		// params = cipher.getParameters();
+		// iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+		byte[] decryptText = cipher.doFinal(ciphertext);
+		System.err.println("Decrypted: " + new String(decryptText, "UTF-8"));
+	}
 }

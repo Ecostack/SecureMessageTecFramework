@@ -1,5 +1,7 @@
 package de.bio.hazard.securemessage.encryption.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -8,17 +10,13 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import junit.framework.TestCase;
 import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricCrypt;
 import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricKeygen;
 
-public class TestSyncCrypt extends TestCase {
+public class TestSyncCrypt {
 
-	public void testEmpty() {
-
-	}
-
-	public void _testSyncCrypt() throws NoSuchAlgorithmException,
+	// @Test
+	public void testSyncCrypt() throws NoSuchAlgorithmException,
 			NoSuchProviderException, NoSuchPaddingException,
 			InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		SymmetricKeygen keygen = new SymmetricKeygen();

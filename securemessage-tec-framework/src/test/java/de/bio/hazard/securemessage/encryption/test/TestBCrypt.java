@@ -1,19 +1,17 @@
 package de.bio.hazard.securemessage.encryption.test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import de.bio.hazard.securemessage.tecframework.encryption.hashing.BCrypt;
 
-public class TestBCrypt extends TestCase {
+public class TestBCrypt {
 
+	@Test
 	public void testBCrypt() {
 		String lcText = "Text to hash!";
-
 		String lcHashed = BCrypt.hashpw(lcText, BCrypt.gensalt(15));
-		System.err.println(lcText);
-		System.err.println(lcHashed);
-
-		System.err.println(BCrypt.checkpw(lcText, lcHashed));
-		lcHashed = BCrypt.hashpw(lcText, BCrypt.gensalt(16));
-
+		assertTrue(BCrypt.checkpw(lcText, lcHashed));
 	}
 }

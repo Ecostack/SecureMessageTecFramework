@@ -1,23 +1,21 @@
 package de.bio.hazard.securemessage.encryption.test;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
 import javax.crypto.NoSuchPaddingException;
 
-import junit.framework.TestCase;
 import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricCrypt;
 import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricKey;
 import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricKeygen;
 
-public class TestAsyncCrypt extends TestCase {
+public class TestAsyncCrypt {
 
-	public void testEmpty() {
-
-	}
-
-	public void _testAsyncCrypt() throws NoSuchAlgorithmException,
+	// @Test
+	public void testAsyncCrypt() throws NoSuchAlgorithmException,
 			NoSuchProviderException, NoSuchPaddingException, IOException {
 		boolean assertBoolean = false;
 		AsymmetricKeygen keygen = new AsymmetricKeygen();
